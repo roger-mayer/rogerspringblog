@@ -3,6 +3,7 @@ package com.codeup.rogerspringblog.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,14 +21,18 @@ public class DiceController {
     public String userGuess(@RequestParam String input, Model model) {
         int guess = Integer.parseInt(input);
         Random randomNum = new Random();
+        String answer = "";
         int num = 1 + randomNum.nextInt(6);
         if (num == guess){
-            String answer = "You guessed correct!!!";
-            return "dice";
+            answer = " You guessed correct!!!";
         } else {
-            String answer = "You guessed INcorrect!!!";
-            return "dice";
+            answer = " You guessed INcorrect!!!";
         }
+        model.addAttribute("input", input);
+        model.addAttribute("num", num);
+        model.addAttribute("answer", answer);
+
+        return "dice";
 
     }
 }
