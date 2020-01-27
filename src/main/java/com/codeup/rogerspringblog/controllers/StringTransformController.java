@@ -40,7 +40,7 @@ public class StringTransformController {
     @RequestMapping(path = "/string/{string}", method = RequestMethod.GET)
     @ResponseBody
     public String query(
-            @PathVariable String string,
+        @PathVariable String string,
         @RequestParam(value="reverse", required=false) boolean reverse,
         @RequestParam(value="uppercase", required = false) boolean uppercase){
         if (reverse && uppercase){

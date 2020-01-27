@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Please guess a number 1-6</h1>
+
+<form action="/roll-dice" method="post">
+    <input type="text" name="input" id="input"/>
+    <button type="submit">ROLL!</button>
+</form>
+<h3> You Guessed <span th:text="${guess}"/></h3>
+<h3> Dice rolled<span th:text="${num}"/></h3>
+<h3> <span th:text="${answer}"/></h3>
+
+</body>
+</html>

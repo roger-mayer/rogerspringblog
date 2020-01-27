@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<navbar th:replace="partials/navbar :: main-nav"/>
+    <h1>Username: <span th:text = "${username}"></span> </h1>
+    <h1>password: <span th:text = "${password}"></span> </h1>
+<!--    each loop-->
+
+    <ul th:each="item : ${shoppingCart}">
+        <li th:text="${item}" /></li>
+    </ul>
+
+<!--if loop-->
+    <div class="alert alert-danger" th:if="${isAdmin}">
+        <h1>User is admin</h1>
+    </div>
+
+
+<footer th:replace="partials/footer :: footer"></footer>
+</body>
+
+</html>
