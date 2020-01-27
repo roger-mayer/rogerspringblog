@@ -1,37 +1,57 @@
 package com.codeup.rogerspringblog.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class StringTransformController {
 
     @GetMapping("/string/reverse/{string}")
     @ResponseBody
-    public StringBuilder reverse(@PathVariable String string){
-        StringBuilder input1 = new StringBuilder();
-        // append a string into StringBuilder input1
-        input1.append(string);
-        // reverse StringBuilder input1
-        input1 = input1.reverse();
-        // print reversed String
-        return input1;
+    public String reverse(@PathVariable String string){
+        char[] in = string.toCharArray();
+        int begin=0;
+        int end=in.length-1;
+        char temp;
+        while(end>begin){
+            temp = in[begin];
+            in[begin]=in[end];
+            in[end] = temp;
+            end--;
+            begin++;
+        }
+        return new String(in);
     }
+
 
     @GetMapping("string/uppercase/{string}")
     @ResponseBody
-    public String toUpper(@PathVariable String string){
+    public String uppercase(@PathVariable String string){
         return string.toUpperCase();
     }
 
     @GetMapping("/string/both/{string}")
     @ResponseBody
-    public StringBuilder upperReverse(@PathVariable String string) {
+    public String upperReverse(@PathVariable String string) {
         string = string.toUpperCase();
         return reverse(string);
     }
 
+    @RequestMapping(path = "/string/{string}", method = RequestMethod.GET)
+    @ResponseBody
+    public String query(
+            @PathVariable String string,
+        @RequestParam(value="reverse", required=false) boolean reverse,
+        @RequestParam(value="uppercase", required = false) boolean uppercase){
+        if (reverse && uppercase){
+            return upperReverse(string);
+        } else if (reverse){
+            return reverse(string);
+        } else if (uppercase){
+            return uppercase(string);
+        } else {
+            return string;
+        }
+    }
 
 }
