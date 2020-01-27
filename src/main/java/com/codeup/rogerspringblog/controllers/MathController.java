@@ -23,10 +23,15 @@ public class MathController {
     public String multiply(@PathVariable int x, @PathVariable int y){
         return x + " * " + y + " = " + (x*y);
     }
-    @GetMapping("/subtract/{x}/and/{y}")
+    @GetMapping("/divide/{x}/and/{y}")
     @ResponseBody
     public String divide(@PathVariable int x, @PathVariable int y){
-        return x + " / " + y + " = " + (x/y);
+        try {
+            return x + " / " + y + " = " + (x/y);
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+        return ("cannot divide by zero");
     }
 
 
