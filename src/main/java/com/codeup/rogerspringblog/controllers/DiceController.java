@@ -24,9 +24,9 @@ public class DiceController {
         String answer = "";
         int num = 1 + randomNum.nextInt(6);
         if (num == guess){
-            answer = " You guessed correct!!!";
+            answer = "You guessed correct!!!";
         } else {
-            answer = " You guessed INcorrect!!!";
+            answer = "You guessed INcorrect!!!";
         }
         model.addAttribute("input", input);
         model.addAttribute("num", num);

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="partials :: head" />
 <body>
+<nav th:replace="partials :: main-nav" />
+
 <!--Linked to DeimosController-->
 <h1><span th:text="${days}">0</span> days left in class!</h1>
 
