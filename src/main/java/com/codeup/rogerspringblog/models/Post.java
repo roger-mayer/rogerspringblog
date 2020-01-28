@@ -11,10 +11,9 @@ public class Post {
    @Column(columnDefinition = "int(11) UNSIGNED")
    private long id;
 
-   @Column(length = 100, nullable = false)
+   @Column(nullable = false, length = 50)
    private String title;
-
-   @Column(columnDefinition = "TEXT")
+   @Column(nullable = false, length = 250)
    private String body;
 
    public Post(){}

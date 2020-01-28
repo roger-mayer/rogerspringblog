@@ -4,10 +4,7 @@ import com.codeup.rogerspringblog.models.Post;
 import com.codeup.rogerspringblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -15,6 +12,7 @@ import java.util.ArrayList;
 public class PostController {
 
     private final PostRepository postDao;
+
 
     public PostController(PostRepository postDao) {
         this.postDao = postDao;
@@ -38,17 +36,25 @@ public class PostController {
         return "posts/show";
 
     }
+
     @GetMapping("/posts/create")
     @ResponseBody
-    public String create(){
-        return "create post form";
-
+    public String showPostForm(){
+        return "view the form for creating a post";
     }
-    @PostMapping("/posts/create")
-    @ResponseBody
-    public String submitPost(){
-        return "Creating a new post";
 
+    @PostMapping ("/posts/create")
+    @ResponseBody
+    public String createPost(@RequestParam String title, @RequestParam String body){
+        System.out.println("title = " + title);
+        System.out.println("body = " + body);
+        return "create a new post";
+    }
+    //edit post
+    @PostMapping("/posts/edit")
+    @ResponseBody
+    public String editPost(){
+        return "posts";
     }
 
     //JPA view all adds
