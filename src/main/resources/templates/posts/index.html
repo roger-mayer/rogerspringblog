@@ -2,9 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Posts Index</title>
 </head>
 <body>
+<h1>POST INDEX</h1>
+
+<div th:each= "post : ${posts}">
+    <h3 th:text = "${post.title}"></h3>
+    <p th:text = "${post.body}"></p>
+</div>
 
 </body>
 </html>
