@@ -10,35 +10,44 @@ import java.util.List;
 
 @Controller
 public class AdsController {
-    //dependency injection
+
+    // Dependency Injection
     private AdRepository adsDao;
-    public AdsController(AdRepository adsDao){
+
+    public AdsController(AdRepository adsDao) {
         this.adsDao = adsDao;
     }
 
     @GetMapping("/ads")
-    public String allAds(){
-        return null;
-
+    public String allAds() {
+        return "index";
     }
+
     @GetMapping("/ads/jpa")
     @ResponseBody
-    public List<Ad> returnAds(){
+    public List<Ad> returnAds() {
         return adsDao.findAll();
-
     }
+
     @GetMapping("/ads/jpa/create")
-    @ResponseBody
-    public void createAd(){
+    public void createAd() {
         Ad ad = new Ad();
-        ad.setTitle("A new ad");
-        ad.setDescription("This is a new decription");
+        ad.setTitle("A new ad!");
+        ad.setDescription("This describes the new ad!");
         adsDao.save(ad);
-
     }
 
+    @GetMapping("/ads/order")
+    @ResponseBody
+    public List<Ad> returnAdsByTitle() {
+        return adsDao.findByOrderByTitle();
+    }
 
+    @GetMapping("/ads/search")
+    @ResponseBody
+    public Ad returnAdByTitle() {
+        return adsDao.findByTitle("B");
+    }
 
 
 }
-

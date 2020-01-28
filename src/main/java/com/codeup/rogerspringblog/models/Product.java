@@ -1,11 +1,14 @@
 package com.codeup.rogerspringblog.models;
 import javax.persistence.*;
 
+
+
 @Entity
-//@Table(name = "products")
+@Table(name = "products")
 public class Product {
-    @Id //sets as Primary Key
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //close to autoincrement for PK
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false, unique = true)

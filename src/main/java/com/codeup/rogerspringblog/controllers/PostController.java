@@ -1,6 +1,7 @@
 package com.codeup.rogerspringblog.controllers;
 
 import com.codeup.rogerspringblog.models.Post;
+import com.codeup.rogerspringblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,13 @@ import java.util.ArrayList;
 
 @Controller
 public class PostController {
+
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao) {
+        this.postDao = postDao;
+    }
+
 
     @GetMapping("/posts")
     public String postIndex(Model model){
@@ -42,5 +50,15 @@ public class PostController {
         return "Creating a new post";
 
     }
+
+    //JPA view all adds
+
+    @GetMapping("/posts/all")
+    public String index(Model model) {
+        model.addAttribute("posts", postDao.findAll());
+        return "posts/index";
+    }
+
+    //de
 
 }
