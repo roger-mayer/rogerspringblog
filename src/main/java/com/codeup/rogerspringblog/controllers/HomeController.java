@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HomeController {
 
-    @GetMapping("/home/{user}")
-    public String homePage(@PathVariable String user, Model model){
+    @GetMapping("/")
 
-        model.addAttribute("user", user);
+    public String showLanding(){
         return "home";
+
     }
 
 }

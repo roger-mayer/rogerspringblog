@@ -1,4 +1,4 @@
-package com.codeup.rogerspringblog.controllers;
+package com.example.test.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,33 +6,38 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-
 @Controller
 public class LoginController {
+    private String username;
+
     @GetMapping("/login")
-    public String loginForm() {
+    public String showLogin(){
         return "login";
     }
 
     @PostMapping("/login")
-    public String loginUser(@RequestParam String username,
-                            @RequestParam String password, Model model) {
+    public String authLogin(
+            @RequestParam String username,
+            @RequestParam String password,
+            Model model
+    ) {
+        System.out.println(username);
+        System.out.println(password);
+        if(username.equals("admin"))
+            if(password.equals("password")) {
+                this.username = username;
+                System.out.println("yes");
+                model.addAttribute("username", username);
+                return "profile";
+            }
+        model.addAttribute("alert", true);
+        return "login";
 
-        ArrayList<String> shoppingCart = new ArrayList<>();
-        shoppingCart.add("apples");
-        shoppingCart.add("oranges");
-        shoppingCart.add("bananas");
+    }
 
-        boolean isAdmin = true;
-
+    @GetMapping("/profile")
+    public String showProfile(Model model){
         model.addAttribute("username", username);
-        model.addAttribute("password", password);
-        model.addAttribute("shoppingCart", shoppingCart);
-        model.addAttribute("isAdmin", isAdmin);
-
         return "profile";
     }
 }
-
-

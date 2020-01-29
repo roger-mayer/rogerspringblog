@@ -6,10 +6,20 @@
 </head>
 <body>
 <h1>POST INDEX</h1>
-
+<br><br>
 <div th:each= "post : ${posts}">
     <h3 th:text = "${post.title}"></h3>
-    <p th:text = "${post.body}"></p>
+    <p th:text = "${post.description}"></p>
+    <form action="/posts/edit" method="get">
+        <input type="hidden" name="postTitle" th:value="${post.getTitle()}">
+        <input type="hidden" name="postDescription" th:value="${post.getDescription()}">
+        <input type="hidden" name="postId" th:value="${post.getId()}">
+        <input type="submit" value="Edit This Post">
+    </form>
+    <form action="/posts/delete" method="post">
+        <input type="hidden" name="postId" th:value="${post.getId()}">
+        <input type="submit" value="Delete This Post">
+    </form>
 </div>
 
 </body>

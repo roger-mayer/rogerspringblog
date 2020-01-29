@@ -8,35 +8,25 @@ public class Post {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(columnDefinition = "int(11) UNSIGNED")
-   private long id;
+   private long id = 0;
 
-   @Column(nullable = false, length = 50)
+   @Column(nullable = false, unique = true)
    private String title;
-   @Column(nullable = false, length = 250)
-   private String body;
 
-   public Post(){}
-
-   public Post(long id, String title, String body){
+   @Column(nullable = false)
+   private String description;
+   public Post() {
+   }
+   public Post(String title, String description){
+      this.title = title;
+      this.description = description;
+   }
+   public Post(long id, String title, String description){
       this.id = id;
       this.title = title;
-      this.body = body;
+      this.description = description;
    }
 
-   public String getTitle() {
-      return title;
-   }
-   public String getBody() {
-      return body;
-   }
-
-   public void setTitle(String title) {
-      this.title = title;
-   }
-   public void setBody(String body) {
-      this.body = body;
-   }
 
    public long getId() {
       return id;
@@ -44,5 +34,30 @@ public class Post {
 
    public void setId(long id) {
       this.id = id;
+   }
+
+   public String getTitle() {
+      return title;
+   }
+
+   public void setTitle(String title) {
+      this.title = title;
+   }
+
+   public String getDescription() {
+      return description;
+   }
+
+   public void setDescription(String description) {
+      this.description = description;
+   }
+
+   @Override
+   public String toString() {
+      return "Post{" +
+              "id=" + id +
+              ", title='" + title + '\'' +
+              ", description='" + description + '\'' +
+              '}';
    }
 }
