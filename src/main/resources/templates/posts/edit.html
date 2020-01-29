@@ -1,63 +1,67 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Edit Post</title>-->
-<!--</head>-->
-<!--<body>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link th:insert="partials/head :: head"></link>
+    <meta charset="UTF-8">
+    <title>Edit Post</title>
+</head>
 
-<!--<h1> Edit your post </h1>-->
-<!--<br>-->
+<body>
+<br>
+<h1 class="column is-offset-1 is-size-2"> Edit your post </h1>
+<hr>
+<br>
+
 <!--<form action="/posts/edit" method="post">-->
-<!--    <input type="text" name="newTitle" th:value="${postTitle}" style="width: 15%">-->
+<!--    <input type="text" name="newTitle" th:value="${postTitle}" style="width: 25%; font-size: 1.25em">-->
 <!--    <br><br>-->
-<!--    <input type="text" name="newBody" th:value="${postBody}">-->
+<!--    <textarea name="newBody" th:text="${postBody}" style="width: 35%; height: 300px; font-size: 1.25em"></textarea>-->
+<!--    <br>-->
 <!--    <input type="hidden" name="sameId" th:value="${postId}">-->
+<!--    <br>-->
 <!--    <input type="submit">-->
 <!--</form>-->
 
-<!--</body>-->
-<!--</html>-->
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+<br><br>
+
+<form action="/posts/edit" method="post">
+    <div class="form-group">
+        <input type="text" class="form-control editInput" th:value="${postTitle}" name="newTitle">
+        <small id="TitleHelp" class="form-text text-muted">Edit the Title of your post here</small>
+    </div>
+    <div class="form-group">
+        <textarea type="text" name="newBody" class="form-control editTextArea" th:text="${postBody}"></textarea>
+        <small id="BodyHelp" class="form-text text-muted">Edit the body of your post here</small>
+    </div>
+    <input type="hidden" name="sameId" th:value="${postId}">
+    <button type="submit" class="btn btn-primary editPostButton">Submit</button>
+
+</form>
+
+<!--<div style="text-align: center; margin-left: 20%; margin-right: 20%">-->
+<!--<div class="column is-half is-offset-one-quarter">-->
+<!--    <form action="/posts/edit" method="post">-->
+<!--        <div class="control column is-three-fifths is-offset-one-fifth">-->
+<!--            <input class="input is-info" type="text" th:value="${postTitle}" name="newTitle">-->
+<!--            <p class="help">Edit Title Here</p>-->
+<!--        </div>-->
+<!--        <div class="field">-->
+<!--            <div class="control column">-->
+<!--                <textarea class="textarea is-info" th:text="${postBody}" name="newBody" rows="8"></textarea>-->
+<!--                <p class="help">Edit Body Here</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input type="hidden" name="sameId" th:value="${postId}">-->
+<!--        </div>-->
+<!--        <div class="column is-one-fifth is-offset-one-fifth">-->
+<!--            <button type="submit" class="button is-link is-hovered">Submit Changes</button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
 
 
-</head>
-<body>
-<nav th:include="partials/navbar :: navbar"></nav>
-<h1>Edit Post</h1>
-<h1 th:if="${alert}" class="text-red">All Fields Required</h1>
-
-<div class="row" >
-    <form class="col-12" th:action="@{'/posts/edit/'+ ${post.id}}" method="post">
-        <input type="number" th:value="${post.id}" name="id" hidden>
-        <div class="row">
-            <div class="input-field col-6">
-                <input placeholder="Title" id="title" type="text" class="validate field" name="title"
-                       th:value="${post.title}">
-                <label for="title">Title</label>
-            </div>
-            <div class="input-field col s6">
-                <input type="text" placeholder="Description"
-                       id="description" class="validate field" name="description" th:value="${post.description}">
-                <label for="description">Description</label>
-            </div>
-            <div class="row">
-                <button class="btn btn-primary" type="submit" name="action">
-                    Submit
-                </button>
-                <a th:href="@{'/posts/'+ ${post.id}}"
-                   class="btn btn-primary">Go Back</a>
-            </div>
-        </div>
-    </form>
-</div>
-
-<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
+
+
 </html>

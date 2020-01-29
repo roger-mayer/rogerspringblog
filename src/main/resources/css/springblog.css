@@ -16,6 +16,9 @@ body {
   padding-top: 60px;
 }
 
+.navbar{
+  background-color: cadetblue; /*Not Working*/
+}
 
 .navbar-brand {font-size: 30px;}
 .navbar-toggle {margin: 13px 15px 13px 0;}
