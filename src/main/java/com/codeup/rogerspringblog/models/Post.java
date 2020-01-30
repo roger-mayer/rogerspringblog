@@ -2,39 +2,46 @@ package com.codeup.rogerspringblog.models;
 import javax.persistence.*;
 
 
+
+import javax.persistence.*;
+
 @Entity
-@Table(name = "post")
+@Table(name = "posts")
 public class Post {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private long id = 0;
+   @Column(columnDefinition = ("INT UNSIGNED"))
+   private long id;
 
-   @Column(nullable = false, unique = true)
+   @Column(nullable = false, length = 50)
    private String title;
 
-   @Column(nullable = false)
-   private String body;
-   public Post() {
-   }
-   public Post(String title, String body){
+   @Column(length = 1000, nullable = false)
+   private String description;
+
+   @ManyToOne
+   @JoinColumn(name = "user_id")
+   private User user;
+
+   public Post(){};
+
+   public Post(String title, String description, User user){
+      this.user = user;
       this.title = title;
-      this.body = body;
+      this.description = description;
    }
-   public Post(long id, String title, String body){
+
+   public Post(long id, String title, String description){
       this.id = id;
       this.title = title;
-      this.body = body;
+      this.description = description;
    }
 
+   public Post(String title, String description) {
 
-   public long getId() {
-      return id;
    }
 
-   public void setId(long id) {
-      this.id = id;
-   }
 
    public String getTitle() {
       return title;
@@ -44,12 +51,28 @@ public class Post {
       this.title = title;
    }
 
-   public String getBody() {
-      return body;
+   public String getDescription() {
+      return description;
    }
 
-   public void setBody(String body) {
-      this.body = body;
+   public void setDescription(String description) {
+      this.description = description;
+   }
+
+   public long getId() {
+      return id;
+   }
+
+   public void setId(long id) {
+      this.id = id;
+   }
+
+   public User getUser() {
+      return user;
+   }
+
+   public void setUser(User user) {
+      this.user = user;
    }
 
    @Override
@@ -57,7 +80,8 @@ public class Post {
       return "Post{" +
               "id=" + id +
               ", title='" + title + '\'' +
-              ", description='" + body + '\'' +
+              ", description='" + description + '\'' +
               '}';
    }
 }
+

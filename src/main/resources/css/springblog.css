@@ -3,9 +3,13 @@
 }
 
 body {
+  margin-left: 1px !important;
   padding-top: 60px;
 }
-
+.container{
+  background-color: lightgray !important;
+  margin-left: 5px;
+}
 .navbar{
   background-color: cadetblue; /*Not Working*/
 }

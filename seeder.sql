@@ -1,6 +1,7 @@
-# drop database rogers_spring_db;
-# show databases;
-# use rogers_spring_db;
+drop database rogers_spring_db;
+show databases;
+create database rogers_spring_db;
+use rogers_spring_db;
 #
 #
 #
@@ -17,22 +18,22 @@
 # #                       UNIQUE KEY UK_????????????????? (age)
 # # );
 #
-# # CREATE TABLE ads(
-# #                     id int(11) unsigned NOT NULL,
-# #                     title varchar(100) NOT NULL,
-# #                     description varchar(500) NOT NULL,
-# #                     primary key(id)
-# # );
-#
-# SELECT * FROM ads;
-# truncate table ads;
-#
-# # seed ads
-# insert into ads (title, description) values
-# ('B', 'This is the test ad 1 description'),
-# ('A', 'This is the test ad 2 description'),
-# ('D', 'This is the test ad 3 description'),
-# ('C', 'This is the test ad 4 description'),
-# ('Very Long Ad 5 Title', 'This is the test ad 5 description');
-#
-# SELECT title FROM ads WHERE LENGTH(title) < 10
+Drop table posts;
+CREATE TABLE posts(
+                    id int(11) unsigned NOT NULL AUTO_INCREMENT,
+                    title varchar(100) NOT NULL,
+                    description varchar(500) NOT NULL,
+                    primary key(id)
+);
+insert into posts (title, description) values
+('post 1', 'This is the test post 1 description'),
+('post 2', 'This is the test post 2 description'),
+('post 3', 'This is the test post 3 description'),
+('post 4', 'This is the test post 4 description');
+
+CREATE TABLE user(
+                      id int(11) unsigned NOT NULL AUTO_INCREMENT,
+                      email varchar(100) NOT NULL,
+                      password varchar(500) NOT NULL,
+                      primary key(id)
+);

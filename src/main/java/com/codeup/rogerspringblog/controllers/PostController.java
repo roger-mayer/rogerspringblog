@@ -2,7 +2,9 @@ package com.codeup.rogerspringblog.controllers;
 
 import com.codeup.rogerspringblog.exception.PostException;
 import com.codeup.rogerspringblog.models.Post;
+import com.codeup.rogerspringblog.models.User;
 import com.codeup.rogerspringblog.repositories.PostRepository;
+import com.codeup.rogerspringblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,72 +14,21 @@ import java.util.List;
 
 @Controller
 public class PostController {
-//    Post post1 = new Post("Title1", "Body1");
-//    Post post2 = new Post("Title2", "Body2");
-//    Post post3 = new Post("Title3", "Body3");
-//    Post post4 = new Post("Title4", "Body4");
-//
-//    @GetMapping("/posts")
-//    public String postsIndex(Model model){
-//        ArrayList<Post> posts = new ArrayList<>();
-//        posts.add(post1);
-//        posts.add(post2);
-//        posts.add(post3);
-//        posts.add(post4);
-//        model.addAttribute("posts", posts);
-//      return "posts/index";
-//    }
-//
-//    @GetMapping("/posts/{id}")
-//    public String viewPost(@PathVariable int id, Model model){
-//        ArrayList<Post> posts = new ArrayList<>();
-//        posts.add(post1);
-//        posts.add(post2);
-//        posts.add(post3);
-//        posts.add(post4);
-//        Post postToShow = posts.get(id - 1);
-//        model.addAttribute("post", postToShow);
-//        return "posts/show";
-//    }
-//
-//    @GetMapping("posts/create")
-//    @ResponseBody
-//    public String createNewPost(){
-//        return "view form for creating posts";
-//    }
-//
-//    @PostMapping("posts/create")
-//    @ResponseBody
-//    public String publishPost(){
-//        return "Publishing new post";
-//    }
 
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao) {
+    public PostController(PostRepository postDao, UserRepository userDao) {
+        this.userDao = userDao;
         this.postDao = postDao;
     }
-
-//    @GetMapping("/posts")
-//    public String index(Model model) {
-//
-//        model.addAttribute("posts", postDao.findAll());
-//        return "posts/index";
-//    }
-
     //! SHOW ALL
     @GetMapping("/posts")
-    public String all(Model model){
+    public String all(Model model) {
         List<Post> posts = postDao.findAll();
         model.addAttribute("posts", posts);
         return "posts/index";
     }
-
-//    @PostMapping("/posts/delete")
-//    public String deletePost(@RequestParam long postId){
-//        postDao.deleteById(postId);
-//        return "posts/index";
-//    }
 
     @GetMapping("/posts/edit")
     public String editPostForm(
@@ -101,35 +52,33 @@ public class PostController {
         return "redirect:/posts";
     }
 
+
     @PostMapping("/posts/delete")
     public String deletePostById(@RequestParam Long postId, Model model) {
         postDao.deleteById(postId);
         return "redirect:/posts";
     }
 
-
-
-
     //! SHOW ONE
-    @GetMapping("/posts/{id}")
-    public String showUserById(
-            @PathVariable long id,
-            Model model
-    ) throws PostException {
-        Post found = postDao.findById(id)
-                .orElseThrow(()-> new PostException());
+//    @GetMapping("/posts/{id}")
+//    public String showUserById(
+//            @PathVariable long id,
+//            Model model
+//    ) throws PostException {
+//        Post found = postDao.findById(id)
+//                .orElseThrow(()-> new PostException());
 
-        model.addAttribute("post", found);
-        return "singlePost";
+//        model.addAttribute("post", found);
+//        return "singlePost";
 
-    }
+//    }
 
     //!CREATE
     @GetMapping("/posts/create")
-    public String showForm(){
+    public String createForm() {
         return "create";
     }
-    //
+
     @PostMapping("/posts/create")
     public String createPost(
             @RequestParam(name = "title") String title,
@@ -138,8 +87,20 @@ public class PostController {
     ) {
         Post post = new Post(title, description);
         postDao.save(post);
-        return "redirect:/posts/index";
+        return "redirect:/posts";
     }
+
+
+    @PostMapping("/posts/create")
+    public String submitPost(@RequestParam String title, @RequestParam String body) {
+        long random = (long) ((Math.random() * 3) + 1);
+        Post newPost = new Post(title, body, userDao.findById(random));
+        User user = userDao.findById(random);
+        user.getPosts().add(newPost);
+        postDao.save(newPost);
+        return "redirect:/posts";
+    }
+
 
     //! EDIT
 //    @GetMapping("/posts/edit/{id}")
@@ -171,26 +132,24 @@ public class PostController {
 //    }
 
     //! Delete
-    @GetMapping("/posts/delete/{id}")
-    public String showDelete(
-            @PathVariable long id,
-            Model model
-    ) throws PostException {
-        postDao.findById(id)
-                .orElseThrow(()-> new PostException());
-        model.addAttribute("id", id);
-        return "delete";
-    }
-
-    @PostMapping("/posts/delete/{id}")
-    public String deletePost(
-            @PathVariable long id
-    ) throws PostException {
-        postDao.findById(id)
-                .orElseThrow(()-> new PostException());
-        postDao.deleteById(id);
-        return "redirect:/posts";
-    }
-
-
+//    @GetMapping("/posts/delete/{id}")
+//    public String showDelete(
+//            @PathVariable long id,
+//            Model model
+//    ) throws PostException {
+//        postDao.findById(id)
+//                .orElseThrow(()-> new PostException());
+//        model.addAttribute("id", id);
+//        return "delete";
+//    }
+//
+//    @PostMapping("/posts/delete/{id}")
+//    public String deletePost(
+//            @PathVariable long id
+//    ) throws PostException {
+//        postDao.findById(id)
+//                .orElseThrow(()-> new PostException());
+//        postDao.deleteById(id);
+//        return "redirect:/posts";
+//    }
 }
