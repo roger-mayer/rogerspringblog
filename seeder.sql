@@ -20,10 +20,10 @@ use rogers_spring_db;
 #
 Drop table posts;
 CREATE TABLE posts(
-                    id int(11) unsigned NOT NULL AUTO_INCREMENT,
+                    posts_id int(11) unsigned NOT NULL AUTO_INCREMENT,
                     title varchar(100) NOT NULL,
                     description varchar(500) NOT NULL,
-                    primary key(id)
+                    primary key(posts_id)
 );
 insert into posts (title, description) values
 ('post 1', 'This is the test post 1 description'),
@@ -31,9 +31,12 @@ insert into posts (title, description) values
 ('post 3', 'This is the test post 3 description'),
 ('post 4', 'This is the test post 4 description');
 
-CREATE TABLE user(
+DROP TABLE users;
+CREATE TABLE users(
                       id int(11) unsigned NOT NULL AUTO_INCREMENT,
                       email varchar(100) NOT NULL,
                       password varchar(500) NOT NULL,
-                      primary key(id)
+                      user_id BIGINT NOT NULL,
+                      PRIMARY KEY (id),
+                      FOREIGN KEY (user_id) REFERENCES posts(id)
 );
