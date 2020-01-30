@@ -3,6 +3,7 @@ package com.codeup.rogerspringblog.controllers;
 import com.codeup.rogerspringblog.exception.PostException;
 import com.codeup.rogerspringblog.models.Post;
 import com.codeup.rogerspringblog.models.User;
+import com.codeup.rogerspringblog.repositories.PostImageRepository;
 import com.codeup.rogerspringblog.repositories.PostRepository;
 import com.codeup.rogerspringblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -17,11 +18,14 @@ public class PostController {
 
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final PostImageRepository postImageDao;
 
-    public PostController(PostRepository postDao, UserRepository userDao) {
-        this.userDao = userDao;
+    public PostController(PostRepository postDao, UserRepository userDao, PostImageRepository postImageDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
+        this.postImageDao = postImageDao;
     }
+
     //! SHOW ALL
     @GetMapping("/posts")
     public String all(Model model) {
@@ -79,77 +83,32 @@ public class PostController {
         return "create";
     }
 
-    @PostMapping("/posts/create")
-    public String createPost(
-            @RequestParam(name = "title") String title,
-            @RequestParam String description,
-            Model model
-    ) {
-        Post post = new Post(title, description);
-        postDao.save(post);
-        return "redirect:/posts";
-    }
-
-
-    @PostMapping("/posts/create")
-    public String submitPost(@RequestParam String title, @RequestParam String body) {
-        long random = (long) ((Math.random() * 3) + 1);
-        Post newPost = new Post(title, body, userDao.findById(random));
-        User user = userDao.findById(random);
-        user.getPosts().add(newPost);
-        postDao.save(newPost);
-        return "redirect:/posts";
-    }
-
-
-    //! EDIT
-//    @GetMapping("/posts/edit/{id}")
-//    public String showEdit(
-//            @PathVariable long id,
-//            Model model
-//    ) throws PostException {
-//        Post post = postDao.findById(id)
-//                .orElseThrow(()-> new PostException());
-//        model.addAttribute("post", post);
-//        return "edit";
-//    }
-
-//    @PostMapping("/posts/edit/{id}")
-//    public String editPost(
-//            @RequestParam long id,
-//            @RequestParam String title,
+//    @PostMapping("/posts/create")
+//    public String createPost(
+//            @RequestParam(name = "title") String title,
 //            @RequestParam String description,
 //            Model model
 //    ) {
-//        if(title.isEmpty() || description.isEmpty()){
-//            model.addAttribute("alert", true);
-//            return "redirect:/posts/edit/"+id;
-//        }
-//        Post post = new Post(id, title, description);
+//        Post post = new Post(title, description);
 //        postDao.save(post);
-//        return "redirect:/posts/"+id;
-
-//    }
-
-    //! Delete
-//    @GetMapping("/posts/delete/{id}")
-//    public String showDelete(
-//            @PathVariable long id,
-//            Model model
-//    ) throws PostException {
-//        postDao.findById(id)
-//                .orElseThrow(()-> new PostException());
-//        model.addAttribute("id", id);
-//        return "delete";
-//    }
-//
-//    @PostMapping("/posts/delete/{id}")
-//    public String deletePost(
-//            @PathVariable long id
-//    ) throws PostException {
-//        postDao.findById(id)
-//                .orElseThrow(()-> new PostException());
-//        postDao.deleteById(id);
 //        return "redirect:/posts";
 //    }
+
+
+//    @PostMapping("/posts/create")
+//    public String submitPost(@RequestParam String title, @RequestParam String description) {
+//        long random = (long) ((Math.random() * 3) + 1);
+//        Post newPost = new Post(title, description, userDao.findById(random));
+//        User user = userDao.findById(random);
+//        user.getPosts().add(newPost);
+//        postDao.save(newPost);
+//        return "redirect:/posts";
+//    }
+
+    @GetMapping("/posts/{id}/details")
+    public String returnOneToOneView(@PathVariable long id, Model model){
+        model.addAttribute("post", postDao.findById(id));
+        return "posts/show";
+    }
+
 }

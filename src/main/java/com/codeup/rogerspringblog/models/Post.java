@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -20,9 +21,21 @@ public class Post {
    @Column(length = 1000, nullable = false)
    private String description;
 
+
+   //relates to PostDetail Model
+   @OneToOne
+   private PostDetails postDetails;
+
+   //relates to User Model
    @ManyToOne
    @JoinColumn(name = "user_id")
    private User user;
+
+   //relates to PostImage Model
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+   private List<PostImage> images;
+
+
 
    public Post(){};
 
@@ -38,10 +51,27 @@ public class Post {
       this.description = description;
    }
 
-   public Post(String title, String description) {
-
+   public Post(long id, String title, String description, PostDetails postDetails) {
+      this.id = id;
+      this.title = title;
+      this.description = description;
+      this.postDetails = postDetails;
    }
 
+   public Post(long id, PostDetails postDetails, User user, List<PostImage> images) {
+      this.id = id;
+      this.postDetails = postDetails;
+      this.user = user;
+      this.images = images;
+   }
+
+   public long getId() {
+      return id;
+   }
+
+   public void setId(long id) {
+      this.id = id;
+   }
 
    public String getTitle() {
       return title;
@@ -59,12 +89,12 @@ public class Post {
       this.description = description;
    }
 
-   public long getId() {
-      return id;
+   public PostDetails getPostDetails() {
+      return postDetails;
    }
 
-   public void setId(long id) {
-      this.id = id;
+   public void setPostDetails(PostDetails postDetails) {
+      this.postDetails = postDetails;
    }
 
    public User getUser() {
@@ -75,13 +105,12 @@ public class Post {
       this.user = user;
    }
 
-   @Override
-   public String toString() {
-      return "Post{" +
-              "id=" + id +
-              ", title='" + title + '\'' +
-              ", description='" + description + '\'' +
-              '}';
+   public List<PostImage> getImages() {
+      return images;
+   }
+
+   public void setImages(List<PostImage> images) {
+      this.images = images;
    }
 }
 

@@ -8,36 +8,27 @@
 
 <body>
 <br>
-<h1 class="column is-offset-1 is-size-2"> Edit your post </h1>
-<hr>
-<br>
 
-<!--<form action="/posts/edit" method="post">-->
-<!--    <input type="text" name="newTitle" th:value="${postTitle}" style="width: 25%; font-size: 1.25em">-->
-<!--    <br><br>-->
-<!--    <textarea name="newBody" th:text="${postBody}" style="width: 35%; height: 300px; font-size: 1.25em"></textarea>-->
-<!--    <br>-->
-<!--    <input type="hidden" name="sameId" th:value="${postId}">-->
-<!--    <br>-->
-<!--    <input type="submit">-->
-<!--</form>-->
+<div class="container">
+    <h1 class=""> Edit your post (edit.html) </h1>
+    <hr>
+    <br>
 
-<br><br>
 
-<form action="/posts/edit" method="post">
-    <div class="form-group">
-        <input type="text" class="form-control editInput" th:value="${postTitle}" name="newTitle">
-        <small id="TitleHelp" class="form-text text-muted">Edit the Title of your post here</small>
-    </div>
-    <div class="form-group">
-        <textarea type="text" name="newBody" class="form-control editTextArea" th:text="${postBody}"></textarea>
-        <small id="BodyHelp" class="form-text text-muted">Edit the body of your post here</small>
-    </div>
-    <input type="hidden" name="sameId" th:value="${postId}">
-    <button type="submit" class="btn btn-primary editPostButton">Submit</button>
-
-</form>
-
+    <br><br>
+    <form action="/posts/edit" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control editInput" th:value="${postTitle}" name="newTitle">
+            <small id="TitleHelp" class="form-text text-muted">Edit the Title of your post here</small>
+        </div>
+        <div class="form-group">
+            <textarea type="text" name="newBody" class="form-control editTextArea" th:text="${postBody}"></textarea>
+            <small id="BodyHelp" class="form-text text-muted">Edit the body of your post here</small>
+        </div>
+        <input type="hidden" name="sameId" th:value="${postId}">
+        <button type="submit" class="btn btn-primary editPostButton">Submit</button>
+    </form>
+</div>
 
 
 <!--<div style="text-align: center; margin-left: 20%; margin-right: 20%">-->
