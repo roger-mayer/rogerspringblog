@@ -21,6 +21,7 @@ public class User {
     @Column(nullable = false, length = 20)
     private String password;
 
+    //one user, many post. maps to post model
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
 

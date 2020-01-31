@@ -66,10 +66,18 @@ public class PostController {
     }
 
     //!CREATE
+    //model param
+//    @GetMapping("/posts/create")
+//    public String createForm(Model model) {
+//        model.addAttribute("post", new Post());
+//        return "create";
+//    }
+
     @GetMapping("/posts/create")
     public String createForm() {
         return "create";
     }
+
 
     @PostMapping("/posts/create")
     public String createPost(
@@ -77,7 +85,10 @@ public class PostController {
             @RequestParam String description,
             Model model
     ) {
-        Post post = new Post(title, description, userDao.findById(1) );
+//        Post post = new Post(title, description, userDao.getB
+        Post post = new Post(title, description);
+        User user = userDao.getOne(1L);
+        post.setUser(user);
         postDao.save(post);
         return "redirect:/posts";
     }

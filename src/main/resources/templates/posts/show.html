@@ -19,6 +19,8 @@
 <h3 th:text="${post.title}"></h3>
 <h5 th:text="${post.description}"></h5>
 <h5 th:text="${post.user.username}"></h5>
+    <p> created by used with id <span th:text="${post.user.id}"> </span></p>
+
 
 
     <th:block th:if="${post.postDetails != null}">
