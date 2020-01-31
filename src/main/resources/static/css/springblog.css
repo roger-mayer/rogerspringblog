@@ -18,7 +18,7 @@ body {
 .navbar-brand {font-size: 30px;}
 .navbar-toggle {margin: 13px 15px 13px 0;}
 
-a {
+.navbar a {
   font-size: 18px;
   padding-bottom: 20px !important;
   padding-top: 20px !important;
@@ -30,16 +30,18 @@ a {
 .card{
   border: 1px solid blue;
   box-sizing: border-box;
+  min-height: 400px;
+  max-width: 400px;
 }
 .card-title{
   display: flex;
   justify-content: center;
   border-bottom: 1px solid blue;
-  font-size: 15px;
+  font-size: 25px;
 }
 .card-body{
-  min-height: 250px;
-  max-width: 200px;
+  border-bottom: 1px solid blue;
+  min-height: 200px;
 }
 
 

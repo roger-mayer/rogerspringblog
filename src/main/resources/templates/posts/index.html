@@ -13,33 +13,41 @@
 <body>
 <nav th:include="partials/navbar :: navbar"></nav>
 <div class="container d-flex">
-    <h1 class="d-flex ml-auto bg-primary"> showing all posts index.html </h1>
+    <h1 class="d-flex ml-auto bg-danger"> showing all posts index.html </h1>
     <hr>
     <br><br>
-<!--    <div class="">-->
+    <div class="row">
 
-        <div th:each="post : ${posts}" class="card">
+        <div th:each="post : ${posts}" class="card col-4">
             <div class="">
                 <a th:text="${post.title}" class="card-title"></a>
-                <div class="card-body">
+                <div class="card-body ">
                     <p th:text="${post.description}"></p>
-                    <div class="row">
-                        <a th:href="@{'/posts/'+${post.id}+'/details'}">
+                </div>
+
+                <div class="row">
+                    <div class="col-4 bg-info">
+                        <a th:href="@{'/posts/'+${post.id}+'/details'}" class="btn ">
                             <button>View Post</button>
                         </a>
+                    </div>
+                    <div class="col-4">
                         <form th:action="@{/posts/edit}" th:method="get" th:object="${post}">
-                            <input type="hidden" name="id" th:value="${post.getId()}">
+                            <input class="btn"type="hidden" name="id" th:value="${post.getId()}">
                             <input type="submit" value="Edit This Post">
                         </form>
+                    </div>
+                    <div class="col-4">
                         <form action="/posts/delete" method="post">
-                            <input type="hidden" name="postId" th:value="${post.getId()}">
+                            <input class="btn" type="hidden" name="postId" th:value="${post.getId()}">
                             <input type="submit" value="Delete This Post">
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
-<!--    </div>-->
+    </div>
     <br>
     <hr>
     <br>
