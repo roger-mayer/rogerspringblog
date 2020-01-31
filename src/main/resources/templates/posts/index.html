@@ -7,7 +7,7 @@
     <title>Index</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="/css/springblog.css">
+    <link rel="stylesheet" href="../static/springblog.css">
     <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -17,7 +17,6 @@
     <hr>
     <br><br>
     <div class="d-flex flex-wrap">
-
         <div th:each="post : ${posts}" class="">
             <div class="">
                 <h3 th:text="${post.title}" class=""></h3>
@@ -36,30 +35,16 @@
                         <input type="hidden" name="postId" th:value="${post.getId()}">
                         <input type="submit" value="Delete This Post">
                     </form>
-
                 </div>
-                <br><br>
-            </div>
+            </div></div>
         </div>
-
-        <div class="row">
-            <div th:each="post : ${posts}">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title ">
-                            <span th:text="${post.title}"/>
-                        </div>
-                        <p th:text="${post.description}"></p>
-                        <div class="card-action">
-                            <a th:href="@{'/posts/'+ ${post.id}}">View Post</a>
-                            <a th:href="@{'/posts/edit/'+ ${post.id}}">Edit Post</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <br><hr><br>
+    <div th:each="user : ${users}">
+        <h3 th:text="${user.username}"></h3>
+        <h3 th:text="${user.email}"></h3>
     </div>
+
+</div>
 </div>
 
 </body>

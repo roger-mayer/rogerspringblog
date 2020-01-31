@@ -31,6 +31,8 @@ public class PostController {
     public String all(Model model) {
         List<Post> posts = postDao.findAll();
         model.addAttribute("posts", posts);
+        List<User> users = userDao.findAll();
+        model.addAttribute("users", users);
         return "posts/index";
     }
 
@@ -63,36 +65,22 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    //! SHOW ONE
-//    @GetMapping("/posts/{id}")
-//    public String showUserById(
-//            @PathVariable long id,
-//            Model model
-//    ) throws PostException {
-//        Post found = postDao.findById(id)
-//                .orElseThrow(()-> new PostException());
-
-//        model.addAttribute("post", found);
-//        return "singlePost";
-
-//    }
-
     //!CREATE
     @GetMapping("/posts/create")
     public String createForm() {
         return "create";
     }
 
-//    @PostMapping("/posts/create")
-//    public String createPost(
-//            @RequestParam(name = "title") String title,
-//            @RequestParam String description,
-//            Model model
-//    ) {
-//        Post post = new Post(title, description);
-//        postDao.save(post);
-//        return "redirect:/posts";
-//    }
+    @PostMapping("/posts/create")
+    public String createPost(
+            @RequestParam(name = "title") String title,
+            @RequestParam String description,
+            Model model
+    ) {
+        Post post = new Post(title, description, userDao.findById(1) );
+        postDao.save(post);
+        return "redirect:/posts";
+    }
 
 
 //    @PostMapping("/posts/create")
