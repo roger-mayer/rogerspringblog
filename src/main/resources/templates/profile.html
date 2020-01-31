@@ -2,13 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="partials/head :: head"></th:block>
+    <title>Profile</title>
 </head>
 <body>
 <nav th:include="partials/navbar :: navbar"></nav>
 
 <h1>Welcome <span th:text="${username}">Username</span>!</h1>
 
-
+<!--possible email form????-->
+<!--<form class="container bg-light" th:action="@{/posts/email}" method="post" th:object="${email}">-->
+<!--    <div class="row">-->
+<!--        <div class="input-field">-->
+<!--            <label for="subject">Subject</label>-->
+<!--            <input th:placeholder="Subject" id="subject" type="text" th:field="*{subject}">-->
+<!--        </div>-->
+<!--        <div class="input-field">-->
+<!--            <label for="description">Description</label>-->
+<!--            <input th:placeholder="Description" id="description" type="text"-->
+<!--                   th:field="*{description}">-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <button class="btn btn-primary" type="submit" name="action">-->
+<!--                Submit-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
 
 
 </body>
