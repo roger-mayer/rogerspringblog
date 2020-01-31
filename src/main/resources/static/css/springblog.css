@@ -3,24 +3,43 @@
 }
 
 body {
-  margin-left: 1px !important;
+  /*margin-left: 1px !important;*/
   padding-top: 60px;
 }
-.container{
-  background-color: lightgray !important;
-  margin-left: 5px;
-}
+/*.container{*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*}*/
+
 .navbar{
-  background-color: cadetblue; /*Not Working*/
+  background-color: cadetblue;
 }
 
 .navbar-brand {font-size: 30px;}
 .navbar-toggle {margin: 13px 15px 13px 0;}
+
 a {
   font-size: 18px;
   padding-bottom: 20px !important;
   padding-top: 20px !important;
   transition: all 0.3s ease;
+}
+
+/*Cards*/
+
+.card{
+  border: 1px solid blue;
+  box-sizing: border-box;
+}
+.card-title{
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid blue;
+  font-size: 15px;
+}
+.card-body{
+  min-height: 250px;
+  max-width: 200px;
 }
 
 

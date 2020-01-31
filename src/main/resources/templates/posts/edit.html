@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <link th:insert="partials/head :: head"></link>
     <meta charset="UTF-8">
     <title>Edit Post</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/static/css/springblog.css">
+    <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
-
+<!--<head th:replace="partials/head :: head('Edit')"></head>-->
 <body>
 <br>
 
-<div class="container">
-    <h1 class=""> Edit your post (edit.html) </h1>
-    <hr>
-    <br>
-
-
-    <br><br>
-    <form action="/posts/edit" method="post">
-        <div class="form-group">
-            <input type="text" class="form-control editInput" th:value="${postTitle}" name="newTitle">
-            <small id="TitleHelp" class="form-text text-muted">Edit the Title of your post here</small>
+<div class="wrapper">
+    <nav th:include="partials/navbar :: navbar"></nav>
+    <header class="container my-5">
+        <div class="jumbotron">
+            <h1 class="text-center display-1">Edit a Post:</h1>
         </div>
-        <div class="form-group">
-            <textarea type="text" name="newBody" class="form-control editTextArea" th:text="${postBody}"></textarea>
-            <small id="BodyHelp" class="form-text text-muted">Edit the body of your post here</small>
-        </div>
-        <input type="hidden" name="sameId" th:value="${postId}">
-        <button type="submit" class="btn btn-primary editPostButton">Submit</button>
-    </form>
-</div>
+    </header>
 
-
-<!--<div style="text-align: center; margin-left: 20%; margin-right: 20%">-->
-<!--<div class="column is-half is-offset-one-quarter">-->
 <!--    <form action="/posts/edit" method="post">-->
-<!--        <div class="control column is-three-fifths is-offset-one-fifth">-->
-<!--            <input class="input is-info" type="text" th:value="${postTitle}" name="newTitle">-->
-<!--            <p class="help">Edit Title Here</p>-->
+<!--        <div class="form-group">-->
+<!--            <input type="text" class="form-control editInput" th:value="${postTitle}" name="newTitle">-->
+<!--            <small id="TitleHelp" class="form-text text-muted">Edit the Title of your post here</small>-->
 <!--        </div>-->
-<!--        <div class="field">-->
-<!--            <div class="control column">-->
-<!--                <textarea class="textarea is-info" th:text="${postBody}" name="newBody" rows="8"></textarea>-->
-<!--                <p class="help">Edit Body Here</p>-->
-<!--            </div>-->
+<!--        <div class="form-group">-->
+<!--            <textarea type="text" name="newBody" class="form-control editTextArea" th:text="${postBody}"></textarea>-->
+<!--            <small id="BodyHelp" class="form-text text-muted">Edit the body of your post here</small>-->
 <!--        </div>-->
-<!--        <div>-->
-<!--            <input type="hidden" name="sameId" th:value="${postId}">-->
-<!--        </div>-->
-<!--        <div class="column is-one-fifth is-offset-one-fifth">-->
-<!--            <button type="submit" class="button is-link is-hovered">Submit Changes</button>-->
-<!--        </div>-->
+<!--        <input type="hidden" name="id" th:value="${postId}">-->
+<!--        <button type="submit" class="btn btn-primary editPostButton">Submit</button>-->
 <!--    </form>-->
 <!--</div>-->
+
+
+    <form class="container bg-light" th:action="@{/posts/edit}" method="post" th:object="${post}">
+        <div class="row">
+            <div class="input-field col s6">
+                <label for="title">Title</label>
+                <input th:value="${post.title}" id="title" type="text" th:field="*{title}">
+            </div>
+            <div class="input-field col s6">
+                <label for="description">Description</label>
+                <input th:value="${post.description}" id="description" type="text"
+                       th:field="*{description}">
+                <input type="hidden" name="id" th:value="${post.id}">
+            </div>
+            <div class="row">
+                <button class="btn btn-primary" type="submit" name="action">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
 
 
 </body>
