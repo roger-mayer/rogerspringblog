@@ -64,10 +64,10 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post){
-        User user = userDao.getOne(1L);
-        post.setUser(user);
-        postDao.save(post);
-        emailServiceDao.prepareAndSend(post,"You just made a post","you just made a post");
+        User user = userDao.getOne(1L); //assign id to user object using user repo
+        post.setUser(user); //Post model- set user to specific post
+        postDao.save(post); //post repo extends jpa repo
+        emailServiceDao.prepareAndSend(post,"You just made a post","you just made a post"); //EmailService.java model
         return "redirect:/posts";
     }
 
