@@ -7,6 +7,7 @@ import com.codeup.rogerspringblog.repositories.PostImageRepository;
 import com.codeup.rogerspringblog.repositories.PostRepository;
 import com.codeup.rogerspringblog.repositories.UserRepository;
 import com.codeup.rogerspringblog.services.EmailService;
+import com.codeup.rogerspringblog.services.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ public class PostController {
     private final UserRepository userDao;
     private final PostImageRepository postImageDao;
     private final EmailService emailServiceDao;
+    private PostService postService;
 
 
     public PostController(PostRepository postDao, UserRepository userDao, PostImageRepository postImageDao, EmailService emailServiceDao) {
@@ -28,6 +30,14 @@ public class PostController {
         this.postImageDao = postImageDao;
         this.emailServiceDao = emailServiceDao;
 
+    }
+
+    public PostController(PostRepository postDao, UserRepository userDao, PostImageRepository postImageDao, EmailService emailServiceDao, PostService postService) {
+        this.postDao = postDao;
+        this.userDao = userDao;
+        this.postImageDao = postImageDao;
+        this.emailServiceDao = emailServiceDao;
+        this.postService = postService;
     }
 
     //! SHOW ALL

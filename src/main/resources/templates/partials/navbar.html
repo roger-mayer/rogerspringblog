@@ -33,6 +33,12 @@
                     <button style="border:none !important" class="btn-link btn p-0">Logout</button>
                 </a>
             </li>
+<!--            <li class="d-flex align-items-center mx-2" th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--                <a th:href="@{'/login?logout'}">-->
+<!--                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout-->
+<!--                </a>-->
+<!--                <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>-->
+<!--            </li>-->
         </ul>
     </div><!--/.nav-collapse -->
 
