@@ -15,22 +15,6 @@
             <h1 class="text-center display-1">Edit a Post:</h1>
         </div>
     </header>
-
-    <!--    <form action="/posts/edit" method="post">-->
-    <!--        <div class="form-group">-->
-    <!--            <input type="text" class="form-control editInput" th:value="${postTitle}" name="newTitle">-->
-    <!--            <small id="TitleHelp" class="form-text text-muted">Edit the Title of your post here</small>-->
-    <!--        </div>-->
-    <!--        <div class="form-group">-->
-    <!--            <textarea type="text" name="newBody" class="form-control editTextArea" th:text="${postBody}"></textarea>-->
-    <!--            <small id="BodyHelp" class="form-text text-muted">Edit the body of your post here</small>-->
-    <!--        </div>-->
-    <!--        <input type="hidden" name="id" th:value="${postId}">-->
-    <!--        <button type="submit" class="btn btn-primary editPostButton">Submit</button>-->
-    <!--    </form>-->
-    <!--</div>-->
-
-
     <form class="container bg-warning" th:action="@{/posts/edit}" method="post" th:object="${post}">
         <div class="row container">
             <div class="input-field ">
@@ -51,10 +35,5 @@
         </div>
     </form>
 </div>
-
-
-
 </body>
-
-
 </html>
