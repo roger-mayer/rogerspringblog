@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="partials/head :: head"></th:block>
-    <title>Create</title>
+    <title>Index</title>
 </head>
 <body>
 <nav th:include="partials/navbar :: navbar"></nav>
@@ -11,7 +11,7 @@
 
     <br><br>
 
-    <div class="d-flex flex-nowrap">
+    <div class="d-flex flex-nowrap row">
         <div th:each="post : ${posts}" class="card col-3 d-inline">
             <a th:text="${post.title}" class="card-title"></a>
             <div class="card-body ">
@@ -25,34 +25,31 @@
                 </div>
             </div>
             <div class="d-flex flex-nowrap btn-div justify-content-around">
-<!--                <div class="bg-info">-->
-                    <a th:href="@{'/posts/'+${post.id}+'/details'}" class="btn ">
-                        <button>View Post</button>
-                    </a>
-<!--                </div>-->
-<!--                <div class="">-->
-                    <form class="d-inline" th:action="@{/posts/edit}" th:method="get" th:object="${post}">
-                        <input class="btn" type="hidden" name="id" th:value="${post.getId()}">
-                        <input type="submit" value="Edit">
-                    </form>
-<!--                </div>-->
-<!--                <div class="">-->
-                    <form class="d-inline" action="/posts/delete" method="post">
-                        <input class="btn" type="hidden" name="postId" th:value="${post.getId()}">
-                        <input type="submit" value="Delete">
-                    </form>
-<!--                </div>-->
+                <!--view post-->
+                <a th:href="@{'/posts/'+${post.id}+'/details'}" class="btn ">
+                    <button>View Post</button>
+                </a>
+                <!--edit post-->
+                <a th:href="@{'/posts/edit/'+${post.id}}" class="btn" th:method="get" th:value="${post.getId()}">
+                    <button>Edit Post</button>
+                </a>
+                <!--delete post-->
+                <a th:href="@{'/posts/delete/'+ ${post.id}}" class="btn" th:value="${post.getId()}">
+                    <button>Delete Post</button>
+                </a>
             </div>
-
         </div>
     </div>
+</div>
 
-    <br><br>
 
-    <div th:each="user : ${users}">
-        <h3 th:text="${user.username}"></h3>
-        <h3 th:text="${user.email}"></h3>
-    </div>
+
+<br><br>
+
+<div th:each="user : ${users}">
+    <h3 th:text="${user.username}"></h3>
+    <h3 th:text="${user.email}"></h3>
+</div>
 </div>
 </body>
 </html>

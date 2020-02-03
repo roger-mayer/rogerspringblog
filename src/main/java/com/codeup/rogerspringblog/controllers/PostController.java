@@ -39,16 +39,17 @@ public class PostController {
         return "posts/index";
     }
 
-    @GetMapping("/posts/edit")
+    @GetMapping("/posts/edit/{id}")
     public String editPostForm
-            (@RequestParam Long id,
+            (@PathVariable Long id,
            Model model){
         model.addAttribute("post", postDao.getOne(id));
+
         return "posts/edit";
     }
 
 
-    @PostMapping("/posts/edit")
+    @PostMapping("/posts/edit/{id}")
     public String editPost(@ModelAttribute Post post){
         postDao.save(post);
         return "redirect:/posts";
@@ -78,7 +79,7 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    @GetMapping("/posts/{id}/details")
+    @GetMapping("/posts/details/{id}")
     public String returnOneToOneView(@PathVariable long id, Model model){
         model.addAttribute("post", postDao.findById(id));
         return "posts/show";

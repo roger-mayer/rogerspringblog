@@ -6,20 +6,33 @@
 </head>
 <body>
 
-<nav th:fragment="navbar" class="navbar dark navbar-inverse navbar-fixed-top">
+<nav th:fragment="navbar" class="navbar navbar-inverse navbar-fixed-top  mt-auto">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">home</a>
+        <a class="navbar-brand align-items-center" href="/">home</a>
 
     </div>
     <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav pull-right">
-            <li class="active"><a href="/posts">Index</a></li>
-            <li><a href="/posts/create">Create</a></li>
+            <li class="d-flex align-items-center mx-2">
+                <a th:href="@{/posts}">
+                    <button style="border:none !important" class="btn-link btn p-0">Index</button>
+                </a>
+            </li>
+            <li class="d-flex align-items-center mx-2">
+                <a th:href="@{/posts/create}">
+                    <button style="border:none !important" class="btn-link btn p-0">Create</button>
+                </a>
+            </li>
+            <li class="d-flex align-items-center mx-2">
+                <a th:href="@{'/login?logout'}">
+                    <button style="border:none !important" class="btn-link btn p-0">Logout</button>
+                </a>
+            </li>
         </ul>
     </div><!--/.nav-collapse -->
 

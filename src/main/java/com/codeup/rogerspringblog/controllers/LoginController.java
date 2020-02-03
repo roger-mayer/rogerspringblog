@@ -12,7 +12,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLogin(){
-        return "login";
+        return "users/login";
     }
 
     @PostMapping("/login")
@@ -31,7 +31,7 @@ public class LoginController {
                 return "profile";
             }
         model.addAttribute("alert", true);
-        return "login";
+        return "users/login";
 
     }
 
