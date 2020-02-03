@@ -1,5 +1,6 @@
 package com.codeup.rogerspringblog.controllers;
 
+import com.codeup.rogerspringblog.exception.PostException;
 import com.codeup.rogerspringblog.models.Post;
 import com.codeup.rogerspringblog.models.User;
 import com.codeup.rogerspringblog.repositories.PostImageRepository;
@@ -72,12 +73,26 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    //!DELETE
-    @PostMapping("/posts/delete")
-    public String deletePostById(@RequestParam Long postId, Model model) {
-        postDao.deleteById(postId);
+    //DELETE
+
+    @GetMapping("/posts/delete/{id}")
+    public String showDelete(
+            @PathVariable long id,
+            Model model) {
+        model.addAttribute("id", id);
+        return "/delete";
+    }
+
+
+    @PostMapping("/posts/delete/{id}")
+    public String deletePost(
+            @PathVariable long id){
+        postDao.deleteById(id);
         return "redirect:/posts";
     }
+
+
+
 
     @GetMapping("/posts/details/{id}")
     public String returnOneToOneView(@PathVariable long id, Model model){

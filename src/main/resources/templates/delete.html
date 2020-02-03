@@ -8,9 +8,9 @@
 <h1>Are you sure you want to delete</h1>
 <div class="row">
     <form th:action="@{'/posts/delete/'+ ${id}}"  method="post">
-        <a th:href="@{'/posts/'+ ${id}}" class="btn waves-effect waves-light btn-small pink darken-2">
+        <a th:href="@{'/posts/'+ ${id}}" class="">
             Go Back</a>
-        <button type="submit" class="btn waves-effect waves-light btn-small pink darken-2">
+        <button type="submit" class="">
             Yes</button>
     </form>
 
