@@ -40,7 +40,18 @@ public class User {
         this.password = password;
     }
 
+    public User(long id, String username, String email, String password, List<Post> posts) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.posts = posts;
+    }
 
+    public User(long id, List<Post> posts) {
+        this.id = id;
+        this.posts = posts;
+    }
 
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
@@ -88,4 +99,6 @@ public class User {
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
+
+
 }

@@ -24,46 +24,56 @@ public class UserController {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
-
-    @GetMapping("/sign-up")
-    public String showSignupForm(Model model){
-        model.addAttribute("user", new User());
-        return "users/sign-up";
-    }
-
-    @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user){
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        users.save(user);
-        System.out.println(user);
-        System.out.println(users);
-        return "redirect:/login";
-    }
-
+//    @GetMapping("/users")
+//    public String showIndex(Model model){
+//        List<User> users = userDao.findAll();
+//        model.addAttribute("users", users);
+//        return "users/all";
+//    }
 
     @GetMapping("/user/{id}")
     public String showSingleUser(
             @PathVariable long id,
-            Model model
-    ) throws PostException {
-        User user = userDao.findById(id)
-                .orElseThrow(()-> new PostException());
+            Model model)
+//            throws PostException {
+    {
+        User user = userDao.findById(id);
+//                .orElseThrow(()-> new PostException());
         model.addAttribute("user", user);
         return "users/single";
     }
 
+//    @GetMapping("/create-user")
+//    public String showSignupForm(Model model){
+//        model.addAttribute("user", new User());
+//        return "users/create-user";
+//    }
+//
+//    @PostMapping("/create-user")
+//    public String saveUser(@ModelAttribute User user){
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
+//        users.save(user);
+//        System.out.println(user);
+//        System.out.println(users);
+//        return "redirect:/login";
+//    }
+
+
+
     //! CREATE
-    @GetMapping("/user/create")
+    @GetMapping("/create-user")
     public String showCreateView(Model model){
         model.addAttribute("user", new User());
-        return "users/create";
+        return "users/create-user";
     }
 
-    @PostMapping("/user/create")
+    @PostMapping("create-user")
     public String createUser(
             @ModelAttribute User user
     ) {
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
         userDao.save(user);
         return "redirect:/user/"+user.getId();
     }
@@ -72,12 +82,13 @@ public class UserController {
     @GetMapping("/user/edit/{id}")
     public String showEditView(
             @PathVariable long id,
-            Model model
-    ) throws PostException {
-        User user = userDao.findById(id)
-                .orElseThrow(()-> new PostException());
+            Model model) {
+//        throws
+//     PostException {
+        User user = userDao.findById(id);
+//                .orElseThrow(()-> new PostException());
         model.addAttribute("user", user);
-        return "users/edit";
+        return "users/edit-user";
     }
     @PostMapping("/user/edit/{id}")
     public String editUser(
@@ -92,12 +103,12 @@ public class UserController {
 
     @PostMapping("/user/delete/{id}")
     public String deleteUser(
-            @PathVariable long id
-    ) throws PostException {
-        User user = userDao.findById(id)
-                .orElseThrow(()->new PostException());
+            @PathVariable long id) {
+//            throws PostException {
+        User user = userDao.findById(id);
+//                .orElseThrow(()->new PostException());
         userDao.delete(user);
-        return "redirect:/users";
+        return "users/create-user";
     }
 
 
