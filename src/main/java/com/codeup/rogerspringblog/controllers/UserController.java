@@ -59,9 +59,10 @@ public class UserController {
 //        return "redirect:/login";
 //    }
 
+    //HOME
+    
 
-
-    //! CREATE
+    //CREATE
     @GetMapping("/create-user")
     public String showCreateView(Model model){
         model.addAttribute("user", new User());
