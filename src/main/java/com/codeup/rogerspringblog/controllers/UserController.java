@@ -24,40 +24,22 @@ public class UserController {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
-//    @GetMapping("/users")
-//    public String showIndex(Model model){
-//        List<User> users = userDao.findAll();
-//        model.addAttribute("users", users);
-//        return "users/all";
-//    }
+
+    @GetMapping("/users")
+    public String showIndex(Model model){
+        List<User> users = userDao.findAll();
+        model.addAttribute("users", users);
+        return "users/users-all";
+    }
 
     @GetMapping("/user/{id}")
     public String showSingleUser(
             @PathVariable long id,
-            Model model)
-//            throws PostException {
-    {
+            Model model) {
         User user = userDao.findById(id);
-//                .orElseThrow(()-> new PostException());
         model.addAttribute("user", user);
         return "users/single";
     }
-
-//    @GetMapping("/create-user")
-//    public String showSignupForm(Model model){
-//        model.addAttribute("user", new User());
-//        return "users/create-user";
-//    }
-//
-//    @PostMapping("/create-user")
-//    public String saveUser(@ModelAttribute User user){
-//        String hash = passwordEncoder.encode(user.getPassword());
-//        user.setPassword(hash);
-//        users.save(user);
-//        System.out.println(user);
-//        System.out.println(users);
-//        return "redirect:/login";
-//    }
 
     //HOME
     
@@ -101,16 +83,22 @@ public class UserController {
     }
 
     //! DELETE
-
-    @PostMapping("/user/delete/{id}")
+    @GetMapping("/users/delete-user/{id}")
+    public String showDelete(
+            @PathVariable long id,
+            Model model) {
+        model.addAttribute("id", id);
+        return "users/delete-user";
+    }
+    @PostMapping("/users/delete-user/{id}")
     public String deleteUser(
             @PathVariable long id) {
-//            throws PostException {
         User user = userDao.findById(id);
-//                .orElseThrow(()->new PostException());
         userDao.delete(user);
-        return "users/create-user";
+        return "redirect:/posts";
     }
+
+
 
 
 }

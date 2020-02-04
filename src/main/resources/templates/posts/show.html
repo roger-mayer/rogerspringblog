@@ -12,17 +12,32 @@
 
 <h3 th:text="${post.title}"></h3>
 <h5 th:text="${post.description}"></h5>
-<h5 th:text="${post.user.username}"></h5>
-    <p> created by used with id <span th:text="${post.user.id}"> </span></p>
+    <h3> created by: <span th:text="${post.user.username}"></span></h3>
+    <h3> created by user with id <span th:text="${post.user.id}"> </span></h3>
 
 
 
-    <th:block th:if="${post.postDetails != null}">
-    <h3 th:text="${post.postDetails.topicDescription}"></h3>
-    <p>History of post:
+    <div th:if="${post.postDetails != null}">
+        <h3 th:text="${post.postDetails.topicDescription}"></h3>
+         <p>History of post:
         <span th:text="${post.postDetails.historyOfPost}"></span>
-    </p>
-    </th:block>
+         </p>
+    </div>
+
+
+        <div th:if="${post.user.id == userId}">
+            <!--edit post-->
+            <a th:href="@{'/posts/edit/'+${post.id}}" class="btn">
+                <button>Edit Post</button>
+            </a>
+            <!--delete post-->
+            <a th:href="@{'/posts/delete/'+ ${post.id}}" class="btn">
+                <button>Delete Post</button>
+            </a>
+        </div>
+
+</div>
+
 
 </div>
 

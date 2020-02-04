@@ -21,27 +21,28 @@ public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
     private final PostImageRepository postImageDao;
-    private final EmailService emailServiceDao;
+    private final EmailService emailService;
+//    private final PostService postService;
 //    private PostService postService;
 
 
-    public PostController(PostRepository postDao, UserRepository userDao, PostImageRepository postImageDao, EmailService emailServiceDao) {
+    public PostController(PostRepository postDao, UserRepository userDao, PostImageRepository postImageDao, EmailService emailService) {
         this.postDao = postDao;
         this.userDao = userDao;
         this.postImageDao = postImageDao;
-        this.emailServiceDao = emailServiceDao;
+        this.emailService = emailService;
 
     }
 
-//    public PostController(PostRepository postDao, UserRepository userDao, PostImageRepository postImageDao, EmailService emailServiceDao, PostService postService) {
+//    public PostController(PostRepository postDao, UserRepository userDao, PostImageRepository postImageDao, EmailService emailService, PostService postService) {
 //        this.postDao = postDao;
 //        this.userDao = userDao;
 //        this.postImageDao = postImageDao;
-//        this.emailServiceDao = emailServiceDao;
+//        this.emailService = emailService;
 //        this.postService = postService;
 //    }
 
-    //! SHOW ALL
+    //SHOW ALL
     @GetMapping("/posts")
     public String all(Model model) {
         List<Post> posts = postDao.findAll();
@@ -68,7 +69,7 @@ public class PostController {
     }
 
 
-    //!CREATE
+    //CREATE
     @GetMapping("/posts/create")
     public String createForm(Model model) {
         model.addAttribute("post", new Post());
@@ -80,7 +81,7 @@ public class PostController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user); //Post model- set user to specific post
         postDao.save(post); //post repo extends jpa repo
-//        emailServiceDao.prepareAndSend(post,"You just made a post","you just made a post"); //EmailService.java model
+        emailService.prepareAndSend(post,"You just made a post","you just made a post"); //EmailService.java model
         return "redirect:/posts";
     }
 
@@ -107,23 +108,10 @@ public class PostController {
 
     @GetMapping("/posts/details/{id}")
     public String returnOneToOneView(@PathVariable long id, Model model){
+        User u = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("userId", u.getId());
         model.addAttribute("post", postDao.findById(id));
         return "posts/show";
     }
-
-    //!EMAIL
-//    @GetMapping("/posts/email")
-//    public String createEmail(@PathVariable long id, Model model) {
-//        model.addAttribute("email", emailServiceDao.findById(id));
-//        return "profile";
-//    }
-
-
-//    @GetMapping("/posts/email")
-//    @ResponseBody
-//    public String sendEmail(@RequestParam long id, Model model){
-//        emailService.prepareAndSend(emailServiceDao.getOne(1L), "subject","description");
-//        return "Sending email...";
-//    }
 
 }

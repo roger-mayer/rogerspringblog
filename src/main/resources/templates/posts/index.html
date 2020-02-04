@@ -16,6 +16,8 @@
             <a th:text="${post.title}" class="card-title"></a>
             <div class="card-body ">
                 <p th:text="${post.description}"></p>
+<!--                <p> created by: <span th:text="${username}"></span></p>-->
+<!--                <p> created by user with id <span th:text="${post.user.userId}"> </span></p>-->
             </div>
             <div style="display: flex; margin: auto">
                 <div th:each="image : ${post.images}">
@@ -26,17 +28,10 @@
             </div>
             <div class="d-flex flex-nowrap btn-div justify-content-around">
                 <!--view post-->
-                <a th:href="@{'/posts/details'+${post.id}}" class="btn ">
+                <a th:href="@{'/posts/details/'+${post.id}}" class="btn ">
                     <button>View Post</button>
                 </a>
-                <!--edit post-->
-                <a th:href="@{'/posts/edit/'+${post.id}}" class="btn">
-                    <button>Edit Post</button>
-                </a>
-                <!--delete post-->
-                <a th:href="@{'/posts/delete/'+ ${post.id}}" class="btn">
-                    <button>Delete Post</button>
-                </a>
+
             </div>
         </div>
     </div>
@@ -46,10 +41,6 @@
 
 <br><br>
 
-<div th:each="user : ${users}">
-    <h3 th:text="${user.username}"></h3>
-    <h3 th:text="${user.email}"></h3>
-</div>
 </div>
 </body>
 </html>
