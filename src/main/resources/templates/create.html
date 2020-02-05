@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--<head th:replace="partials/head :: head('Create')"></head>-->
 <head>
     <th:block th:insert="partials/head :: head"></th:block>
     <title>Create</title>
@@ -9,18 +8,20 @@
 <div class="wrapper">
     <nav th:include="partials/navbar :: navbar"></nav>
 
-    <header class="container my-5">
-        <div class="jumbotron">
+    <header class="jumbotron">
+
             <h1 class="text-center display-1">Create a Post:</h1>
-        </div>
+<!--            <h1 class="text-center display-1"><span th:text="${name}">holder</span></h1>-->
+
     </header>
+
         <form class="container bg-light" th:action="@{/posts/create}" method="post" th:object="${post}">
             <div class="row">
-                <div class="input-field col s6">
+                <div class="col-6">
                     <label for="title">Title</label>
                     <input th:placeholder="Title" id="title" type="text" th:field="*{title}">
                 </div>
-                <div class="input-field col s6">
+                <div class="col-6">
                     <label for="description">Description</label>
                     <input th:placeholder="Description" id="description" type="text"
                            th:field="*{description}">

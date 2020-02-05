@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="partials/head :: head"></th:block>
+    <title>create-user</title>
+</head>
+<body>
+<nav th:include="partials/navbar :: navbar"></nav>
+<h1 th:text="${user.username}" class="">One User</h1>
+
+<div class="row">
+    <div class="card col-6" >
+<!--        <div class="card-body">-->
+            <div class="card-title">
+                <h2 class=""><span th:text="${user.email}">holder</span></h2>
+            </div>
+<!--        <div th:each="image : ${post.images}">-->
+<!--            <div>-->
+<!--                <img th:src="${image.url}" style="height: 200px; margin: auto"/>-->
+<!--            </div>-->
+<!--        </div>-->
+            <!--            action-->
+            <div class="card-action" style="padding-top: 300px">
+                <a class=""
+                   th:href="@{'/user/edit/'+ ${user.id}}">
+                    Edit Profile</a>
+
+                <!-- Modal Trigger -->
+                <a class="btn" href="#modal1">Delete Profile</a>
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <h4>Confirm</h4>
+                        <p>Are you sure you want to delete your profile?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form th:action="@{'/user/delete/'+ ${user.id}}"
+                              method="post">
+                            <a href="#!"
+                               class=""> No</a>
+                            <button type="submit"
+                                    class="btn"
+                            >Yes
+                            </button>
+                        </form>
+
+                    </div>
+<!--                </div>-->
+
+            </div>
+        </div>
+    </div>
+    <!--            end action-->
+    <th:block th:each="post : ${user.posts}">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-title" th:text="${post.title}"></div>
+                <a th:href="@{'/posts/details/'+${post.id}}" class="btn ">
+                    <button>View Post</button>
+                </a>
+            </div>
+        </div>
+    </th:block>
+
+</div>
+
+<!--</div>-->
+<!--</div>-->
+</body>
+</html>

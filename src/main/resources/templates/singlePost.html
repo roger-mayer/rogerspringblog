@@ -16,8 +16,8 @@
             <div class="card-action">
 
 <!--                would like to get these to work-->
-<!--                <a th:href="@{'/posts/edit/'+ ${post.id}}">Edit Post</a>-->
-<!--                <a th:href="@{'/posts/delete/'+ ${id}}" >Delete post</a>-->
+                <a th:href="@{'/posts/edit/'+ ${post.id}}">Edit Post</a>
+                <a th:href="@{'/posts/delete/'+ ${id}}" >Delete post</a>
 
                 <form action="/posts/edit" method="get">
                     <input type="hidden" name="postTitle" th:value="${post.getTitle()}">

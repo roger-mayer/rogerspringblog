@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <link th:insert="partials/head :: head"></link>
-
-    <meta charset="UTF-8">
-    <title>Index</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="/static/css/springblog.css">
-    <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <th:block th:insert="partials/head :: head"></th:block>
+    <title>Show</title>
 </head>
 <body>
 <nav th:include="partials/navbar :: navbar"></nav>
@@ -18,27 +12,42 @@
 
 <h3 th:text="${post.title}"></h3>
 <h5 th:text="${post.description}"></h5>
-<h5 th:text="${post.user.username}"></h5>
-    <p> created by used with id <span th:text="${post.user.id}"> </span></p>
+    <h3> created by: <span th:text="${post.user.username}"></span></h3>
+    <h3> created by user with id <span th:text="${post.user.id}"> </span></h3>
 
 
 
-    <th:block th:if="${post.postDetails != null}">
-    <h3 th:text="${post.postDetails.topicDescription}"></h3>
-    <p>History of post:
+    <div th:if="${post.postDetails != null}">
+        <h3 th:text="${post.postDetails.topicDescription}"></h3>
+         <p>History of post:
         <span th:text="${post.postDetails.historyOfPost}"></span>
-    </p>
-    </th:block>
+         </p>
+    </div>
+
+
+        <div th:if="${post.user.id == userId}">
+            <!--edit post-->
+            <a th:href="@{'/posts/edit/'+${post.id}}" class="btn">
+                <button>Edit Post</button>
+            </a>
+            <!--delete post-->
+            <a th:href="@{'/posts/delete/'+ ${post.id}}" class="btn">
+                <button>Delete Post</button>
+            </a>
+        </div>
 
 </div>
 
-<!--<div style="display: flex; flex-wrap: wrap">-->
-<!--    <div th:each="image : ${post.images}">-->
-<!--        <div>-->
-<!--            <img th:src="${image.url}" style="height: 300px; margin-left: 10px; margin-right: 10px;"/>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+
+</div>
+
+<div style="display: flex; flex-wrap: wrap">
+    <div th:each="image : ${post.images}">
+        <div>
+            <img th:src="${image.url}" style="height: 300px; margin-left: 10px; margin-right: 10px;"/>
+        </div>
+    </div>
+</div>
 
 
 </body>

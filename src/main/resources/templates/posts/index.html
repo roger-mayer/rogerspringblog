@@ -1,63 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <link th:insert="partials/head :: head"></link>
-
-    <meta charset="UTF-8">
+    <th:block th:insert="partials/head :: head"></th:block>
     <title>Index</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="../../static/css/springblog.css">
-    <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
 <nav th:include="partials/navbar :: navbar"></nav>
-<div class="container d-flex">
+<div class="d-flex">
     <h1 class="d-flex ml-auto bg-danger"> showing all posts index.html </h1>
-    <hr>
+
     <br><br>
-    <div class="row">
 
-        <div th:each="post : ${posts}" class="card col-4">
-            <div class="">
-                <a th:text="${post.title}" class="card-title"></a>
-                <div class="card-body ">
-                    <p th:text="${post.description}"></p>
-                </div>
-
-                <div class="row">
-                    <div class="col-4 bg-info">
-                        <a th:href="@{'/posts/'+${post.id}+'/details'}" class="btn ">
-                            <button>View Post</button>
-                        </a>
-                    </div>
-                    <div class="col-4">
-                        <form th:action="@{/posts/edit}" th:method="get" th:object="${post}">
-                            <input class="btn"type="hidden" name="id" th:value="${post.getId()}">
-                            <input type="submit" value="Edit This Post">
-                        </form>
-                    </div>
-                    <div class="col-4">
-                        <form action="/posts/delete" method="post">
-                            <input class="btn" type="hidden" name="postId" th:value="${post.getId()}">
-                            <input type="submit" value="Delete This Post">
-                        </form>
+    <div class="d-flex flex-nowrap row">
+        <div th:each="post : ${posts}" class="card col-3 d-inline">
+            <a th:text="${post.title}" class="card-title"></a>
+            <div class="card-body ">
+                <p th:text="${post.description}"></p>
+<!--                <p> created by: <span th:text="${username}"></span></p>-->
+<!--                <p> created by user with id <span th:text="${post.user.userId}"> </span></p>-->
+            </div>
+            <div style="display: flex; margin: auto">
+                <div th:each="image : ${post.images}">
+                    <div>
+                        <img th:src="${image.url}" style="height: 200px; margin: auto"/>
                     </div>
                 </div>
+            </div>
+            <div class="d-flex flex-nowrap btn-div justify-content-around">
+                <!--view post-->
+                <a th:href="@{'/posts/details/'+${post.id}}" class="btn ">
+                    <button>View Post</button>
+                </a>
 
             </div>
         </div>
     </div>
-    <br>
-    <hr>
-    <br>
-    <div th:each="user : ${users}">
-        <h3 th:text="${user.username}"></h3>
-        <h3 th:text="${user.email}"></h3>
-    </div>
-
-</div>
 </div>
 
+
+
+<br><br>
+
+</div>
 </body>
 </html>
