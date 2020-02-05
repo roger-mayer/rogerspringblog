@@ -13,11 +13,10 @@ public class NavbarController {
 //        return "this is a home page for the blog";
 //    }
 
-//    @GetMapping("/about")
-//    @ResponseBody
-//    public String navBarAbout(){
-//        return "this is an 'about me' page for the blog";
-//    }
+    @GetMapping("/about")
+    public String navBarAbout(){
+        return "/about";
+    }
 //
 //    @GetMapping("/contact")
 //    @ResponseBody
