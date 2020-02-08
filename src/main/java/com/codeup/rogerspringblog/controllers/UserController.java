@@ -81,7 +81,6 @@ public class UserController {
         userDao.save(user);
         return "redirect:/user/" + id;
     }
-
     //! DELETE
     @GetMapping("/users/delete-user/{id}")
     public String showDelete(
@@ -97,8 +96,4 @@ public class UserController {
         userDao.delete(user);
         return "redirect:/posts";
     }
-
-
-
-
 }
