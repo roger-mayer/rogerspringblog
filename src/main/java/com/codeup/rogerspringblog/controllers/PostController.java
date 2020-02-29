@@ -6,8 +6,8 @@ import com.codeup.rogerspringblog.models.User;
 import com.codeup.rogerspringblog.repositories.PostImageRepository;
 import com.codeup.rogerspringblog.repositories.PostRepository;
 import com.codeup.rogerspringblog.repositories.UserRepository;
-import com.codeup.rogerspringblog.services.EmailService;
-import com.codeup.rogerspringblog.services.PostService;
+//import com.codeup.rogerspringblog.services.EmailService;
+//import com.codeup.rogerspringblog.services.PostService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,18 +21,24 @@ public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
     private final PostImageRepository postImageDao;
-    private final EmailService emailService;
+//    private final EmailService emailService;
 //    private final PostService postService;
 //    private PostService postService;
 
-
-    public PostController(PostRepository postDao, UserRepository userDao, PostImageRepository postImageDao, EmailService emailService) {
+    public PostController(PostRepository postDao, UserRepository userDao, PostImageRepository postImageDao) {
         this.postDao = postDao;
         this.userDao = userDao;
         this.postImageDao = postImageDao;
-        this.emailService = emailService;
-
     }
+
+
+//    public PostController(PostRepository postDao, UserRepository userDao, PostImageRepository postImageDao, EmailService emailService) {
+//        this.postDao = postDao;
+//        this.userDao = userDao;
+//        this.postImageDao = postImageDao;
+//        this.emailService = emailService;
+
+//    }
 
 //    public PostController(PostRepository postDao, UserRepository userDao, PostImageRepository postImageDao, EmailService emailService, PostService postService) {
 //        this.postDao = postDao;
@@ -81,7 +87,7 @@ public class PostController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user); //Post model- set user to specific post
         postDao.save(post); //post repo extends jpa repo
-        emailService.prepareAndSend(post,"You just made a post","you just made a post"); //EmailService.java model
+//        emailService.prepareAndSend(post,"You just made a post","you just made a post"); //EmailService.java model
         return "redirect:/posts";
     }
 
