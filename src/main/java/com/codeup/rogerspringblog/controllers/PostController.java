@@ -109,9 +109,6 @@ public class PostController {
         return "redirect:/posts";
     }
 
-
-
-
     @GetMapping("/posts/details/{id}")
     public String returnOneToOneView(@PathVariable long id, Model model){
         User u = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
